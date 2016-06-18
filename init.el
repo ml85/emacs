@@ -20,7 +20,7 @@
 
 (require 'package)
 
-(setq package-list '(evil solarized-theme))
+(setq package-list '(evil))
 
 (setq package-archives '(("melpa" . "http://melpa.org/packages/")
 			 ("org" . "http://orgmode.org/elpa/")))
@@ -39,5 +39,4 @@
 
 (setq custom-safe-themes t)
 
-(require 'solarized)
-(load-theme 'solarized-light)
+(load-theme 'leuven t)

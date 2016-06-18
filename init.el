@@ -20,13 +20,14 @@
 
 (require 'package)
 
-(setq package-list '(evil org))
+(setq package-list '(evil solarized-theme))
 
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+(setq package-archives '(("melpa" . "http://melpa.org/packages/")
+			 ("org" . "http://orgmode.org/elpa/")))
 
 (package-initialize)
 
-(unless packge-archive-contents
+(unless package-archive-contents
   (package-refresh-contents))
 
 (dolist (package package-list)
@@ -35,3 +36,8 @@
 
 (require 'evil)
 (evil-mode 1)
+
+(setq custom-safe-themes t)
+
+(require 'solarized)
+(load-theme 'solarized-light)

@@ -20,24 +20,23 @@
 
 (require 'package)
 
-(setq package-list '(evil leuven-theme))
+(setq package-list '(leuven-theme neotree magit))
 
 (setq package-archives '(("melpa" . "http://melpa.org/packages/")
 			 ("org" . "http://orgmode.org/elpa/")))
 
 (package-initialize)
 
-(unless package-archive-contents
-  (package-refresh-contents))
+(package-refresh-contents)
 
 (dolist (package package-list)
   (unless (package-installed-p package)
     (package-install package)))
 
-(require 'evil)
-(evil-mode 1)
-
 (setq custom-safe-themes t)
 
 (require 'leuven-theme)
 (load-theme 'leuven t)
+
+(require 'neotree)
+(global-set-key [f8] 'neotree-toggle)

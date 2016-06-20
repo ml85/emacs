@@ -20,7 +20,7 @@
 
 (require 'package)
 
-(setq package-list '(evil))
+(setq package-list '(evil leuven-theme))
 
 (setq package-archives '(("melpa" . "http://melpa.org/packages/")
 			 ("org" . "http://orgmode.org/elpa/")))
@@ -39,4 +39,5 @@
 
 (setq custom-safe-themes t)
 
+(require 'leuven-theme)
 (load-theme 'leuven t)

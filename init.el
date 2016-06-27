@@ -20,10 +20,16 @@
 
 (require 'package)
 
-(setq package-list '(leuven-theme neotree magit))
+(setq package-list
+      '(avy
+        leuven-theme
+	magit
+        swiper
+	))
 
-(setq package-archives '(("melpa" . "http://melpa.org/packages/")
-			 ("org" . "http://orgmode.org/elpa/")))
+(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
+			 ("melpa" . "http://melpa.org/packages/")
+     			 ("org" . "http://orgmode.org/elpa/")))
 
 (package-initialize)
 
@@ -31,12 +37,7 @@
 
 (dolist (package package-list)
   (unless (package-installed-p package)
+    (message "Installing %s" package)
     (package-install package)))
 
-(setq custom-safe-themes t)
-
-(require 'leuven-theme)
-(load-theme 'leuven t)
-
-(require 'neotree)
-(global-set-key [f8] 'neotree-toggle)
+(org-babel-load-file (expand-file-name "emacs.org" user-emacs-directory))

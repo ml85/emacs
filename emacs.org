@@ -1,0 +1,66 @@
+* Instructions
+* Reduce clutter
+  
+Remove toolbar, scrollbar and menubar.
+#+NAME: window-setup
+#+BEGIN_SRC emacs-lisp
+(when (window-system)
+  (tool-bar-mode -1)
+  (scroll-bar-mode -1)
+  (menu-bar-mode -1))
+#+END_SRC
+
+* Startup
+** Avy
+
+An extension for jumping to characters, words and lines.
+#+NAME: startup
+#+BEGIN_SRC emacs-lisp
+(require 'avy)
+(setq avy-background t)
+(global-set-key (kbd "C-'") 'avy-goto-char)
+(global-set-key (kbd "M-g f") 'avy-goto-line)
+(global-set-key (kbd "M-g w") 'avy-goto-word-1)
+#+END_SRC
+
+* Search and completion extensions
+** TODO Ivy
+
+#+NAME: search-and-complete
+#+BEGIN_SRC emacs-lisp
+(require 'ivy)
+(ivy-mode 1)
+(setq ivy-use-virtual-buffers t)
+(global-set-key (kbd "C-s") 'swiper)
+#+END_SRC
+
+
+* General Bindings
+
+General key bindings
+#+NAME: general-bindings
+#+BEGIN_SRC emacs-lisp
+;; Goto line
+(global-set-key (kbd "C-c C-l") 'goto-line)
+
+;; Kill whole line
+(global-set-key (kbd "C-S-k") 'kill-whole-line)
+#+END_SRC
+
+* Formatting and whitespace
+
+#+NAME: formatting
+#+BEGIN_SRC emacs-lisp
+(setq-default indent-tabs-mode nil)
+(setq-default c-basic-offset 3)
+#+END_SRC
+
+* Theme
+
+Load the leuven theme
+#+NAME: themes
+#+BEGIN_SRC emacs-lisp
+(setq custom-safe-themes t)
+(require 'leuven-theme)
+(load-theme 'leuven t)
+#+END_SRC

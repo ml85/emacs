@@ -1,8 +1,16 @@
 * Instructions
-* Reduce clutter
-  
+* General initialization
+** General start up
+Inhibit that anyoing start up screen
+#+NAME: general-init
+#+BEGIN_SRC emacs-lisp
+;; do not show default startup screen
+(setq inhibit-startup-message t)
+#+END_SRC
+
+** Remove toolbar, scrollbar and menubar  
 Remove toolbar, scrollbar and menubar.
-#+NAME: window-setup
+#+NAME: general-init
 #+BEGIN_SRC emacs-lisp
 (when (window-system)
   (tool-bar-mode -1)
@@ -10,9 +18,28 @@ Remove toolbar, scrollbar and menubar.
   (menu-bar-mode -1))
 #+END_SRC
 
-* Startup
-** Avy
+** Disable autosave and backups
+Don't want all those autosave and backup files
+#+NAME: general-init
+#+BEGIN_SRC emacs-lisp
+;; do not create annoying backup files
+(setq make-backup-files nil)
 
+;; turn off auto save mode
+(setq auto-save-default nil)
+(auto-save-mode 0)
+#+END_SRC
+
+** General setup
+Enable higlight for matching patanthesis
+#+NAME: general-init
+#+BEGIN_SRC emacs-lisp
+(show-paren-mode 1)
+#+END_SRC
+
+* Extensions
+** Cursor movement
+*** Avy
 An extension for jumping to characters, words and lines.
 #+NAME: startup
 #+BEGIN_SRC emacs-lisp
@@ -23,9 +50,8 @@ An extension for jumping to characters, words and lines.
 (global-set-key (kbd "M-g w") 'avy-goto-word-1)
 #+END_SRC
 
-* Search and completion extensions
-** TODO Ivy
-
+** Search and completion extensions
+*** TODO Ivy
 #+NAME: search-and-complete
 #+BEGIN_SRC emacs-lisp
 (require 'ivy)
@@ -34,9 +60,7 @@ An extension for jumping to characters, words and lines.
 (global-set-key (kbd "C-s") 'swiper)
 #+END_SRC
 
-
 * General Bindings
-
 General key bindings
 #+NAME: general-bindings
 #+BEGIN_SRC emacs-lisp
@@ -48,7 +72,6 @@ General key bindings
 #+END_SRC
 
 * Formatting and whitespace
-
 #+NAME: formatting
 #+BEGIN_SRC emacs-lisp
 (setq-default indent-tabs-mode nil)
@@ -56,7 +79,6 @@ General key bindings
 #+END_SRC
 
 * Theme
-
 Load the leuven theme
 #+NAME: themes
 #+BEGIN_SRC emacs-lisp

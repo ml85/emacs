@@ -75,6 +75,15 @@ An extension for jumping to characters, words and lines.
 (global-set-key (kbd "C-s") 'swiper)
 #+END_SRC
 
+** Code specific
+*** C++
+**** Clang format
+#+NAME: code-specific
+#+BEGIN_SRC emacs-lisp
+(require 'clang-format)
+(global-set-key (kbd "C-c i") 'clang-format-buffer)
+#+END_SRC
+
 * General Bindings
 General key bindings
 #+NAME: general-bindings

@@ -50,6 +50,21 @@ An extension for jumping to characters, words and lines.
 (global-set-key (kbd "M-g w") 'avy-goto-word-1)
 #+END_SRC
 
+*** Change inner
+#+NAME: startup
+#+BEGIN_SRC emacs-lisp
+(require 'change-inner)
+(global-set-key (kbd "M-i") 'change-inner)
+(global-set-key (kbd "M-o") 'change-outer)
+#+END_SRC
+
+*** Expand region
+#+NAME: startup
+#+BEGIN_SRC emacs-lisp
+(require 'expand-region)
+(global-set-key (kbd "C-=") 'er/expand-region)
+#+END_SRC
+
 ** Search and completion extensions
 *** TODO Ivy
 #+NAME: search-and-complete
@@ -67,6 +82,15 @@ Extension for encryption/decryption of files
 #+BEGIN_SRC emacs-lisp
 (require 'epa-file)
 (epa-file-enable)
+#+END_SRC
+
+** Code specific
+*** C++
+**** Clang format
+#+NAME: code-specific
+#+BEGIN_SRC emacs-lisp
+(require 'clang-format)
+(global-set-key (kbd "C-c i") 'clang-format-buffer)
 #+END_SRC
 
 * General Bindings

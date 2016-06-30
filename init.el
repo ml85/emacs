@@ -2,6 +2,9 @@
 
 (setq package-list
       '(avy
+        clang-format
+        change-inner
+        expand-region
         leuven-theme
 	magit
         swiper

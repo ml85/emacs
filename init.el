@@ -2,6 +2,8 @@
 
 (setq package-list
       '(avy
+        change-inner
+        expand-region
         leuven-theme
 	magit
         swiper

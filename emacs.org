@@ -87,6 +87,15 @@ An extension for jumping to characters, words and lines.
 (global-set-key (kbd "C-s") 'swiper)
 #+END_SRC
 
+** Encryption
+*** EasyPG
+Extension for encryption/decryption of files
+#+NAME: encryption
+#+BEGIN_SRC emacs-lisp
+(require 'epa-file)
+(epa-file-enable)
+#+END_SRC
+
 ** Code specific
 *** C++
 **** Clang format

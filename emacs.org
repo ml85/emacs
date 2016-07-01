@@ -65,6 +65,18 @@ An extension for jumping to characters, words and lines.
 (global-set-key (kbd "C-=") 'er/expand-region)
 #+END_SRC
 
+*** Multiple cursors
+#+NAME: cursor-movement
+#+BEGIN_SRC emacs-lisp
+;; Require cl is due to a bug. This might be fixed in the future!
+(require 'cl)
+(require 'multiple-cursors)
+(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+#+END_SRC
+
 ** Search and completion extensions
 *** TODO Ivy
 #+NAME: search-and-complete

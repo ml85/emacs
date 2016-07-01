@@ -6,7 +6,7 @@
         change-inner
         expand-region
         leuven-theme
-	magit
+        magit
         multiple-cursors
         neotree
         swiper

@@ -65,6 +65,13 @@ An extension for jumping to characters, words and lines.
 (global-set-key (kbd "C-=") 'er/expand-region)
 #+END_SRC
 
+** File brower
+#+NAME: file-browser
+#+BEGIN_SRC emacs-lisp
+(require 'neotree)
+(global-set-key [f8] 'neotree-toggle)
+#+END_SRC
+
 ** Search and completion extensions
 *** TODO Ivy
 #+NAME: search-and-complete

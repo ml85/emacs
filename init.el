@@ -6,6 +6,7 @@
         change-inner
         expand-region
         leuven-theme
+        neotree
 	magit
         swiper
 	))

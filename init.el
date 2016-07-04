@@ -4,11 +4,13 @@
       '(avy
         clang-format
         change-inner
+        counsel
+        dired+
+        dired-subtree
         expand-region
         leuven-theme
         magit
         multiple-cursors
-        neotree
         swiper
 	))
 

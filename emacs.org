@@ -6,6 +6,12 @@ Inhibit that anyoing start up screen
 #+BEGIN_SRC emacs-lisp
 ;; do not show default startup screen
 (setq inhibit-startup-message t)
+
+;; Do not truncate lines
+(setq-default truncate-lines t)
+
+;; Delete selection when I start to type
+(delete-selection-mode 1)
 #+END_SRC
 
 ** Remove toolbar, scrollbar and menubar  
@@ -79,22 +85,23 @@ An extension for jumping to characters, words and lines.
 #+END_SRC
 
 ** Dired
+#+NAME: dired
 #+BEGIN_SRC emacs-lisp
 ;; Dired shouldn't open new windows for subdirectories
-(toggle-diredp-find-file-reuse-dir 1)
-(setq dired-hide-details-hide-information-lines nil)
-(setq dired-hide-details-hide-symlink-targets nil)
-(setq dired-listing-switches "-alh")
+;;(require 'dired)
+;;(toggle-diredp-find-file-reuse-dir 1)
+;;(setq dired-hide-details-hide-information-lines nil)
+;;(setq dired-hide-details-hide-symlink-targets nil)
+;;(setq dired-listing-switches "-alh")
 #+END_SRC
 
-
 *** Dired-subtree
-+NAME: dired
+#+NAME: dired
 #+BEGIN_SRC emacs-lisp
-(require 'dired-subtree)
-(define-key dired-mode-map (kbd "i") 'dired-subtree-toggle)
-(setq dired-subtree-use-backgrounds nil)
-(setq dired-subtree-line-prefix-face nil)
+;;(require 'dired-subtree)
+;;(define-key dired-mode-map (kbd "i") 'dired-subtree-toggle)
+;;(setq dired-subtree-use-backgrounds nil)
+;;(setq dired-subtree-line-prefix-face nil)
 #+END_SRC
 
 ** Search and completion extensions
@@ -105,8 +112,23 @@ An extension for jumping to characters, words and lines.
 (ivy-mode 1)
 (setq ivy-use-virtual-buffers t)
 (global-set-key (kbd "C-s") 'swiper)
-(global-set-key (kbd "M-x") 'counsel-M-x)
-(global-set-key (kbd "C-x C-f") 'counsel-find-file)
+;;(global-set-key (kbd "M-x") 'counsel-M-x)
+;;(global-set-key (kbd "C-x C-f") 'counsel-find-file)
+#+END_SRC
+
+*** Projectile
+#+NAME: search-and-complete
+#+BEGIN_SRC emacs-lisp
+(require 'projectile)
+
+(setq projectile-enable-caching t)
+
+(projectile-global-mode)
+
+;;(add-hook 'c-mode-common-hook 'projectile-mode)
+;;(add-hook 'c++-mode-common-hook 'projectile-mode)
+
+(setq projectile-completion-system 'ivy)
 #+END_SRC
 
 ** Encryption
@@ -118,13 +140,52 @@ Extension for encryption/decryption of files
 (epa-file-enable)
 #+END_SRC
 
-** Code specific
+** Programming
+*** General
+**** Speedbar
+#+NAME: programming
+#+BEGIN_SRC emacs-lisp
+(require 'sr-speedbar)
+(setq speedbar-use-images nil)
+#+END_SRC
+
 *** C++
 **** Clang format
 #+NAME: code-specific
 #+BEGIN_SRC emacs-lisp
 (require 'clang-format)
 (global-set-key (kbd "C-c i") 'clang-format-buffer)
+#+END_SRC
+
+**** Company
+#+NAME: code-specific
+#+BEGIN_SRC emacs-lisp
+(require 'company)
+(push 'company-rtags company-backends)
+(global-company-mode)
+
+(require 'cc-mode)
+(define-key c-mode-base-map (kbd "<C-tab>") (function company-complete))
+#+END_SRC
+
+**** RTags
+RTags requires rdm and rc. Clone, build  and install: https://github.com/Andersbakken/rtags
+
+#+NAME: code-specific
+#+BEGIN_SRC emacs-lisp
+(require 'rtags)
+
+(add-hook 'c-mode-common-hook 'rtags-start-process-unless-running)
+(add-hook 'c++-mode-common-hook 'rtags-start-process-unless-running)
+
+(setq rtags-path "/usr/local/bin")
+
+;; TODO: Use other key bindings?
+(rtags-enable-standard-keybindings)
+
+(setq rtags-autostart-diagnostics t)
+(setq rtags-completions-enabled t)
+(rtags-diagnostics)
 #+END_SRC
 
 * General Bindings
@@ -152,10 +213,24 @@ General key bindings
 #+END_SRC
 
 * Theme
-Load the leuven theme
+** General
 #+NAME: themes
 #+BEGIN_SRC emacs-lisp
 (setq custom-safe-themes t)
-(require 'leuven-theme)
-(load-theme 'leuven t)
+#+END_SRC
+
+** Leuven
+Load the leuven theme
+#+NAME: themes
+#+BEGIN_SRC emacs-lisp
+;;(require 'leuven-theme)
+;;(load-theme 'leuven t)
+#+END_SRC
+
+** Zenburn
+Load the zenburn theme
+#+NAME: themes
+#+BEGIN_SRC emacs-lisp
+(require 'zenburn-theme)
+(load-theme 'zenburn t)
 #+END_SRC

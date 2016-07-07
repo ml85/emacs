@@ -4,6 +4,7 @@
       '(avy
         clang-format
         change-inner
+        company
         counsel
         dired+
         dired-subtree
@@ -11,7 +12,11 @@
         leuven-theme
         magit
         multiple-cursors
+        projectile
+        speedbar
+        sr-speedbar
         swiper
+        zenburn-theme
 	))
 
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")

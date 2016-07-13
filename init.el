@@ -125,9 +125,9 @@
   (setq rtags-path "/usr/local/bin")
   (setq rtags-autostart-diagnostics t)
   (setq rtags-completions-enabled t)
-  (rtags-diagnostics)
   :config
   (rtags-enable-standard-keybindings))
+  (rtags-diagnostics)
 
 ;;(use-package company
 ;;  :init

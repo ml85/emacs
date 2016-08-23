@@ -8,7 +8,9 @@
         counsel
         dired+
         dired-subtree
+        elpy
         expand-region
+        haskell-mode
         ivy
         leuven-theme
         magit
@@ -23,7 +25,8 @@
 
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
 			 ("melpa" . "http://melpa.org/packages/")
-     			 ("org" . "http://orgmode.org/elpa/")))
+     			 ("org" . "http://orgmode.org/elpa/")
+                         ("elpy" . "https://jorgenschaefer.github.io/packages/")))
 
 (package-initialize)
 

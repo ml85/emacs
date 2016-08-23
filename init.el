@@ -2,6 +2,8 @@
 
 ;;* General initialization
 ;;** General start up
+(setenv "PATH" (concat "/usr/local/bin:" (getenv "PATH")))
+(setq exec-path (append '("/usr/local/bin") exec-path))
 (setq inhibit-startup-message t)
 (setq initial-scratch-message "")
 (setq-default truncate-lines t)
@@ -135,6 +137,14 @@
 ;;  :config
 ;;  (push 'company-rtags company-backends))
 ;;(define-key c-mode-base-map (kbd "C-TAB") (function company-complete))
+
+;;*** Haskell
+(use-package haskell-mode)
+
+;;*** Python
+(use-package elpy
+  :init
+  (elpy-enable))
 
 ;;* Key bindings
 (global-set-key (kbd "C-c C-l") 'goto-line)

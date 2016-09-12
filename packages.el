@@ -15,11 +15,13 @@
         leuven-theme
         magit
         multiple-cursors
+        neotree
         projectile
+        solarized-theme
         speedbar
         sr-speedbar
         swiper
-	use-package
+        use-package
         zenburn-theme
 	))
 

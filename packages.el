@@ -20,7 +20,8 @@
         sr-speedbar
         swiper
 	use-package
-        zenburn-theme
+        yaml-mode
+	zenburn-theme
 	))
 
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")

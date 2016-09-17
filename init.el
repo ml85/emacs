@@ -11,6 +11,7 @@
 (show-paren-mode 1)
 (prefer-coding-system 'utf-8)
 (defalias 'yes-or-no-p 'y-or-n-p)
+(set-default-font "Inconsolata-10")
 
 ;;** Remove toolbar, scrollbar and menubar
 (when (window-system)
@@ -29,10 +30,12 @@
 
 ;;** Theme
 (setq custom-safe-themes t)
-(require 'zenburn-theme)
-(load-theme 'zenburn t)
+;;(require 'zenburn-theme)
+;;(load-theme 'zenburn t)
 ;;(require 'leuven-theme)
 ;;(load-theme 'leuven t)
+(require 'solarized-theme)
+(load-theme 'solarized-dark t)
 
 ;;* Packages
 ;;** Package archives
@@ -86,6 +89,10 @@
   (setq dired-subtree-line-prefix-face nil)
   :bind (:map dired-mode-map
 	      ("i" . dired-subtree-toggle)))
+
+;;** Neotree
+(use-package neotree
+  :bind ("<f8>" . neotree-toggle))
 
 ;;** Search and completion
 ;;*** Ivy

@@ -74,6 +74,10 @@
 (use-package expand-region
   :bind (("C-=" . er/expand-region)))
 
+;;*** Cua
+(use-package cua-base
+  :init (cua-mode 1))
+
 ;;** Dired
 (use-package dired
   :init
@@ -103,6 +107,9 @@
   :bind (("C-s" . swiper)
 	 ("M-x" . counsel-M-x)
 	 ("C-x C-f" . counsel-find-file)))
+
+;;*** Ag
+(use-package ag)
 
 ;;*** Projectile
 (use-package projectile

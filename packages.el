@@ -1,7 +1,8 @@
 (require 'package)
 
 (setq package-list
-      '(avy
+      '(ag
+        avy
         clang-format
         change-inner
         company

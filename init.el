@@ -160,6 +160,9 @@
   :init
   (elpy-enable))
 
+;;*** Yaml
+(use-package yaml-mode)
+
 ;;* Key bindings
 (global-set-key (kbd "C-c C-l") 'goto-line)
 (global-set-key (kbd "C-S-k") 'kill-whole-line)

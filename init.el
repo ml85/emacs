@@ -36,6 +36,7 @@
 ;;(load-theme 'leuven t)
 (require 'solarized-theme)
 (load-theme 'solarized-dark t)
+;;(load-theme 'solarized-light t)
 
 ;;* Packages
 ;;** Package archives
@@ -65,6 +66,10 @@
 	 ("C-c C-<" . mc/mark-all-like-this)))
 
 ;;** Select, erase etc
+;;*** Cua
+(use-package cua-base
+  :init (cua-mode 1))
+
 ;;*** Change inner
 (use-package change-inner
   :bind (("M-i" . change-inner)
@@ -103,6 +108,9 @@
   :bind (("C-s" . swiper)
 	 ("M-x" . counsel-M-x)
 	 ("C-x C-f" . counsel-find-file)))
+
+;;*** Ag
+(use-package ag)
 
 ;;*** Projectile
 (use-package projectile
@@ -155,6 +163,20 @@
 
 ;;*** Yaml
 (use-package yaml-mode)
+
+;;*** Javascript
+(use-package js2-mode
+  :mode (("\\.js\\'" . js2-mode)
+         ("\\.jsx\\'" . js2-jsx-mode))
+  :config (setq-default
+           js2-strict-missing-semi-warning nil
+           js2-basic-offset 2
+           js2-bounce-indent-p t))
+
+(use-package js2-refactor
+  :diminish js2-refactor-mode
+  :init
+  (add-hook 'js2-mode-hook #'js2-refactor-mode))
 
 ;;* Key bindings
 (global-set-key (kbd "C-c C-l") 'goto-line)

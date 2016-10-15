@@ -1,7 +1,8 @@
 (require 'package)
 
 (setq package-list
-      '(avy
+      '(ag
+        avy
         clang-format
         change-inner
         company
@@ -12,6 +13,8 @@
         expand-region
         haskell-mode
         ivy
+        js2-mode
+        js2-refactor
         leuven-theme
         magit
         multiple-cursors

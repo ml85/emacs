@@ -61,8 +61,8 @@
 ;;*** Multiple cursors
 (use-package multiple-cursors
   :bind (("C-S-c C-S-c" . mc/edit-lines)
-	 ("C->" . mc/mark-next-like-this)
-	 ("C-<" . mc/mark-previous-like-this)
+	 ("C->" . mc/mark-next-like-this-word)
+	 ("C-<" . mc/mark-previous-like-this-word)
 	 ("C-c C-<" . mc/mark-all-like-this)))
 
 ;;** Select, erase etc
@@ -176,12 +176,14 @@
 (use-package js2-refactor
   :diminish js2-refactor-mode
   :init
-  (add-hook 'js2-mode-hook #'js2-refactor-mode))
+  (add-hook 'js2-mode-hook 'js2-refactor-mode))
 
 ;;* Key bindings
 (global-set-key (kbd "C-c C-l") 'goto-line)
 (global-set-key (kbd "C-S-k") 'kill-whole-line)
-(global-set-key (kbd "s-<left>")  'windmove-left)
+(global-set-key (kbd "s-<left>") 'windmove-left)
 (global-set-key (kbd "s-<right>") 'windmove-right)
-(global-set-key (kbd "s-<up>")    'windmove-up)
-(global-set-key (kbd "s-<down>")  'windmove-down)
+(global-set-key (kbd "s-<up>") 'windmove-up)
+(global-set-key (kbd "s-<down>") 'windmove-down)
+(global-set-key (kbd "C-c C-k") 'comment-region)
+(global-set-key (kbd "C-c C-u") 'uncomment-region)

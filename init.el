@@ -79,6 +79,10 @@
 (use-package expand-region
   :bind (("C-=" . er/expand-region)))
 
+;;*** Cua
+(use-package cua-base
+  :init (cua-mode 1))
+
 ;;** Dired
 (use-package dired
   :init

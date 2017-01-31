@@ -17,6 +17,7 @@
         js2-refactor
         leuven-theme
         magit
+        monokai-theme
         multiple-cursors
         neotree
         projectile

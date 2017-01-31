@@ -19,6 +19,9 @@
   (scroll-bar-mode -1)
   (menu-bar-mode -1))
 
+;;* Highlight current line
+(global-hl-line-mode 1)
+
 ;;** Disable autosave and backups
 (setq make-backup-files nil)
 (setq auto-save-default nil)
@@ -139,16 +142,16 @@
 (use-package clang-format
   :bind (("C-c i" . clang-format-buffer)))
 
-(use-package rtags
-  :init
-  (add-hook 'c-mode-common-hook 'rtags-start-process-unless-running)
-  (add-hook 'c++-mode-common-hook 'rtags-start-process-unless-running)
-  (setq rtags-path "/usr/local/bin")
-  (setq rtags-autostart-diagnostics t)
-  (setq rtags-completions-enabled t)
-  :config
-  (rtags-enable-standard-keybindings))
-  (rtags-diagnostics)
+;;(use-package rtags
+;;  :init
+;;  (add-hook 'c-mode-common-hook 'rtags-start-process-unless-running)
+;;  (add-hook 'c++-mode-common-hook 'rtags-start-process-unless-running)
+;;  (setq rtags-path "/usr/local/bin")
+;;  (setq rtags-autostart-diagnostics t)
+;;  (setq rtags-completions-enabled t)
+;;  :config
+;;  (rtags-enable-standard-keybindings))
+;;  (rtags-diagnostics)
 
 ;;(use-package company
 ;;  :init
@@ -191,3 +194,5 @@
 (global-set-key (kbd "s-<down>") 'windmove-down)
 (global-set-key (kbd "C-c C-k") 'comment-region)
 (global-set-key (kbd "C-c C-u") 'uncomment-region)
+(global-set-key (kbd "M-g M-s") 'magit-status)
+(global-set-key (kbd "M-g M-c") 'magit-checkout)

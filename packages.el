@@ -5,12 +5,14 @@
         avy
         clang-format
         change-inner
+        cmake-ide
         company
         counsel
         dired+
         dired-subtree
         elpy
         expand-region
+        flycheck
         haskell-mode
         ivy
         js2-mode

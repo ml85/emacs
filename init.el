@@ -32,10 +32,10 @@
 (setq custom-safe-themes t)
 ;;(require 'zenburn-theme)
 ;;(load-theme 'zenburn t)
-;;(require 'leuven-theme)
-;;(load-theme 'leuven t)
-(require 'solarized-theme)
-(load-theme 'solarized-dark t)
+(require 'leuven-theme)
+(load-theme 'leuven t)
+;;(require 'solarized-theme)
+;;(load-theme 'solarized-dark t)
 ;;(load-theme 'solarized-light t)
 
 ;;* Packages
@@ -139,16 +139,30 @@
 (use-package clang-format
   :bind (("C-c i" . clang-format-buffer)))
 
-(use-package rtags
+(use-package flycheck
   :init
-  (add-hook 'c-mode-common-hook 'rtags-start-process-unless-running)
-  (add-hook 'c++-mode-common-hook 'rtags-start-process-unless-running)
-  (setq rtags-path "/usr/local/bin")
-  (setq rtags-autostart-diagnostics t)
-  (setq rtags-completions-enabled t)
-  :config
-  (rtags-enable-standard-keybindings))
-  (rtags-diagnostics)
+  (add-hook 'prog-mode-hook (lambda () (flycheck-mode)))
+  (add-hook 'c++-mode-hook (lambda () (setq flycheck-clang-language-standard "c++14"))))
+
+(require 'rtags)
+(setq rtags-autostart-diagnostics t)
+(rtags-diagnostics)
+(setq rtags-completions-enabled t)
+(rtags-enable-standard-keybindings)
+
+(require 'cmake-ide)
+(cmake-ide-setup)
+
+;;(use-package rtags
+;;  :init
+;;  (add-hook 'c-mode-common-hook 'rtags-start-process-unless-running)
+;;  (add-hook 'c++-mode-common-hook 'rtags-start-process-unless-running)
+;;  (setq rtags-path "/usr/local/bin")
+;;  (setq rtags-autostart-diagnostics t)
+;;  (setq rtags-completions-enabled t)
+;;  :config
+;;  (rtags-enable-standard-keybindings))
+;;  (rtags-diagnostics)
 
 ;;(use-package company
 ;;  :init

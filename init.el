@@ -19,6 +19,9 @@
   (scroll-bar-mode -1)
   (menu-bar-mode -1))
 
+;;* Highlight current line
+(global-hl-line-mode 1)
+
 ;;** Disable autosave and backups
 (setq make-backup-files nil)
 (setq auto-save-default nil)
@@ -205,3 +208,5 @@
 (global-set-key (kbd "s-<down>") 'windmove-down)
 (global-set-key (kbd "C-c C-k") 'comment-region)
 (global-set-key (kbd "C-c C-u") 'uncomment-region)
+(global-set-key (kbd "M-g M-s") 'magit-status)
+(global-set-key (kbd "M-g M-c") 'magit-checkout)

@@ -29,7 +29,7 @@
 
 ;;** Formatting
 (setq-default indent-tabs-mode nil)
-(setq-default c-basic-offset 3)
+(setq-default c-basic-offset 2)
 
 ;;** Theme
 (setq custom-safe-themes t)
@@ -155,6 +155,9 @@
 
 (require 'cmake-ide)
 (cmake-ide-setup)
+(setq cmake-ide-flags-c++ (append '("-std=c++14")))
+(setq cmake-ide-dir "build")
+(global-set-key (kbd "C-c m") 'cmake-ide-compile)
 
 ;;(use-package rtags
 ;;  :init

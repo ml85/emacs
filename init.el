@@ -35,11 +35,15 @@
 (setq custom-safe-themes t)
 ;;(require 'zenburn-theme)
 ;;(load-theme 'zenburn t)
-(require 'leuven-theme)
-(load-theme 'leuven t)
+;;(require 'leuven-theme)
+;;(load-theme 'leuven t)
+;;(require 'leuven-theme)
+;;(load-theme 'leuven t)
 ;;(require 'solarized-theme)
 ;;(load-theme 'solarized-dark t)
 ;;(load-theme 'solarized-light t)
+(require 'monokai-theme)
+(load-theme 'monokai)
 
 ;;* Packages
 ;;** Package archives

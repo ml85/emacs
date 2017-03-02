@@ -73,10 +73,6 @@
 	 ("C-c C-<" . mc/mark-all-like-this)))
 
 ;;** Select, erase etc
-;;*** Cua
-(use-package cua-base
-  :init (cua-mode 1))
-
 ;;*** Change inner
 (use-package change-inner
   :bind (("M-i" . change-inner)
@@ -85,10 +81,6 @@
 ;;*** Expand region
 (use-package expand-region
   :bind (("C-=" . er/expand-region)))
-
-;;*** Cua
-(use-package cua-base
-  :init (cua-mode 1))
 
 ;;** Dired
 (use-package dired
@@ -142,44 +134,36 @@
   :init
   (setq speedbar-use-images nil))
 
+;; To get a bunch of extra snippets that come in super handy see:
+;; https://github.com/AndreaCrotti/yasnippet-snippets
+;; or use:
+;; git clone https://github.com/AndreaCrotti/yasnippet-snippets.git ~/.emacs.d/yassnippet-snippets/
+(use-package yasnippet
+  :init
+  (yas-global-mode 1)
+  :config
+  (add-to-list 'yas-snippet-dirs "~/.emacs.d/yasnippet-snippets/")
+  (yas-reload-all))
+
 ;;*** C++
 (use-package clang-format
   :bind (("C-c i" . clang-format-buffer)))
 
-(use-package flycheck
-  :init
-  (add-hook 'prog-mode-hook (lambda () (flycheck-mode)))
-  (add-hook 'c++-mode-hook (lambda () (setq flycheck-clang-language-standard "c++14"))))
-
-(require 'rtags)
-(setq rtags-autostart-diagnostics t)
-(rtags-diagnostics)
-(setq rtags-completions-enabled t)
-(rtags-enable-standard-keybindings)
-
-(require 'cmake-ide)
-(cmake-ide-setup)
-(setq cmake-ide-flags-c++ (append '("-std=c++14")))
-(setq cmake-ide-dir "build")
-(global-set-key (kbd "C-c m") 'cmake-ide-compile)
+;;(require 'cmake-ide)
+;;(cmake-ide-setup)
+;;(setq cmake-ide-flags-c++ (append '("-std=c++14")))
+;;(setq cmake-ide-dir "build")
+;;(global-set-key (kbd "C-c m") 'cmake-ide-compile)
 
 ;;(use-package rtags
-;;  :init
-;;  (add-hook 'c-mode-common-hook 'rtags-start-process-unless-running)
-;;  (add-hook 'c++-mode-common-hook 'rtags-start-process-unless-running)
-;;  (setq rtags-path "/usr/local/bin")
-;;  (setq rtags-autostart-diagnostics t)
-;;  (setq rtags-completions-enabled t)
-;;  :config
-;;  (rtags-enable-standard-keybindings))
-;;  (rtags-diagnostics)
-
-;;(use-package company
-;;  :init
-;;  (global-company-mode)
-;;  :config
-;;  (push 'company-rtags company-backends))
-;;(define-key c-mode-base-map (kbd "C-TAB") (function company-complete))
+;; :init
+;; (add-hook 'c-mode-common-hook 'rtags-start-process-unless-running)
+;; (add-hook 'c++-mode-common-hook 'rtags-start-process-unless-running)
+;;(setq rtags-path "/usr/local/bin")
+;; (setq rtags-autostart-diagnostics t)
+;; :config
+;; (rtags-enable-standard-keybindings))
+;; (rtags-diagnostics)
 
 ;;*** Haskell
 (use-package haskell-mode)

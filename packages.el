@@ -6,13 +6,12 @@
         clang-format
         change-inner
         cmake-ide
-        company
+        cmake-mode
         counsel
         dired+
         dired-subtree
         elpy
         expand-region
-        flycheck
         haskell-mode
         ivy
         js2-mode
@@ -29,6 +28,7 @@
         swiper
 	use-package
         yaml-mode
+        yasnippet
 	zenburn-theme
 	))
 

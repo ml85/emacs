@@ -36,6 +36,10 @@
 (setq-default js2-basic-offset 2)
 (setq-default css-indent-offset 2)
 
+;;** Inherit bash environment.
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
+
 ;;** Theme
 (setq custom-safe-themes t)
 ;;(require 'zenburn-theme)
@@ -65,6 +69,13 @@
 (require 'use-package)
 (require 'cl)
 (require 'cc-mode)
+
+;;** Fix colors in compilation buffer
+(require 'ansi-color)
+(defun colorize-compilation-buffer ()
+  (let ((inhibit-read-only t))
+    (ansi-color-apply-on-region (point-min) (point-max))))
+(add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
 
 ;;** Evil mode
 ;; (use-package evil
@@ -137,7 +148,33 @@
   (projectile-global-mode)
   (setq projectile-completion-system 'ivy)
   (setq projectile-indexing-method 'alien)
-  (setq projectile-enable-caching nil))
+  (setq projectile-enable-caching nil)
+  (setq projectile-project-root-files-bottom-up '(".projectile"))
+  (setq projectile-project-root-files-functions '(projectile-root-bottom-up))
+  :config
+  (progn
+    ;; Use `ag' all the time if available
+    (defun mkiael/advice-projectile-use-ag ()
+      "Always use `ag' for getting a list of all files in the project."
+      (mapconcat 'identity
+                 (append '("\\ag") ; used unaliased version of `ag': \ag
+                         '("--nogroup" ;mandatory argument for ag.el as per https://github.com/Wilfred/ag.el/issues/41
+                           "--skip-vcs-ignores" ;Ignore files/dirs ONLY from `.ignore'
+                           "--numbers" ;Line numbers
+                           "--smart-case"
+                           "--follow" ;Follow symlinks
+                           "--ignore" "build" )
+                         '("-0" ; output null separated results
+                           "-g ''")) ; get file names matching the regex '' (all files)
+                 " "))
+    (when (executable-find "ag")
+      (advice-add 'projectile-get-ext-command :override #'mkiael/advice-projectile-use-ag))
+
+    ;; Make the file list creation faster by NOT calling `projectile-get-sub-projects-files'
+    (defun mkiael/advice-projectile-no-sub-project-files ()
+      "Directly call `projectile-get-ext-command'. No need to try to get a list of sub-project files if the vcs is git."
+      (projectile-files-via-ext-command (projectile-get-ext-command)))
+    (advice-add 'projectile-get-repo-files :override #'mkiael/advice-projectile-no-sub-project-files)))
 
 ;;*** Encryption
 ;;(use-package epa-file

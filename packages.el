@@ -3,16 +3,18 @@
 (setq package-list
       '(ag
         avy
-        clang-format
+        ;;clang-format
         change-inner
-        cmake-ide
-        cmake-mode
+        ;;cmake-ide
+        ;;cmake-mode
         counsel
         dired+
         dired-subtree
         elpy
+        evil
         expand-region
-        haskell-mode
+        gruvbox-theme
+        ;;haskell-mode
         ivy
         js2-mode
         js2-refactor
@@ -23,13 +25,13 @@
         neotree
         projectile
         solarized-theme
-        speedbar
-        sr-speedbar
+        ;;speedbar
+        ;;sr-speedbar
         swiper
 	use-package
-        yaml-mode
+        ;;yaml-mode
         yasnippet
-	zenburn-theme
+	;;zenburn-theme
 	))
 
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")

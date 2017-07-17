@@ -9,9 +9,10 @@
 (setq-default truncate-lines t)
 (delete-selection-mode t)
 (show-paren-mode 1)
+(global-linum-mode 1)
 (prefer-coding-system 'utf-8)
 (defalias 'yes-or-no-p 'y-or-n-p)
-(set-default-font "Inconsolata-10")
+;;(set-default-font "Inconsolata-10")
 
 ;;** Remove toolbar, scrollbar and menubar
 (when (window-system)
@@ -30,6 +31,10 @@
 ;;** Formatting
 (setq-default indent-tabs-mode nil)
 (setq-default c-basic-offset 2)
+(setq-default javascript-indent-level 2)
+(setq-default js-indent-level 2)
+(setq-default js2-basic-offset 2)
+(setq-default css-indent-offset 2)
 
 ;;** Theme
 (setq custom-safe-themes t)
@@ -42,10 +47,15 @@
 ;;(require 'solarized-theme)
 ;;(load-theme 'solarized-dark t)
 ;;(load-theme 'solarized-light t)
-(require 'monokai-theme)
-(load-theme 'monokai)
+;;(require 'monokai-theme)
+;;(load-theme 'monokai)
+(require 'gruvbox-theme)
+(load-theme 'gruvbox t)
 
 ;;* Packages
+;;** Load path
+(add-to-list 'load-path "/usr/local/share/emacs/site-lisp/rtags")
+
 ;;** Package archives
 (setq package-archives
       '(("melpa" . "http://melpa.org/packages/")
@@ -55,6 +65,13 @@
 (require 'use-package)
 (require 'cl)
 (require 'cc-mode)
+
+;;** Evil mode
+;; (use-package evil
+;;   :init
+;;   (setq evil-want-C-u-scroll t)
+;;   :config
+;;   (evil-mode 1)
 
 ;;** Cursor movement
 ;;*** Avy             
@@ -97,7 +114,6 @@
   (setq dired-subtree-line-prefix-face nil)
   :bind (:map dired-mode-map
 	      ("i" . dired-subtree-toggle)))
-
 ;;** Neotree
 (use-package neotree
   :bind ("<f8>" . neotree-toggle))
@@ -130,12 +146,12 @@
 
 ;;** Programming
 ;;*** General
-(use-package sr-speedbar
-  :init
-  (setq speedbar-use-images nil))
+;;(use-package sr-speedbar
+;;  :init
+;;  (setq speedbar-use-images nil))
 
 ;; To get a bunch of extra snippets that come in super handy see:
-;; https://github.com/AndreaCrotti/yasnippet-snippets
+;; htps://github.com/AndreaCrotti/yasnippet-snippets
 ;; or use:
 ;; git clone https://github.com/AndreaCrotti/yasnippet-snippets.git ~/.emacs.d/yassnippet-snippets/
 (use-package yasnippet
@@ -146,8 +162,8 @@
   (yas-reload-all))
 
 ;;*** C++
-(use-package clang-format
-  :bind (("C-c i" . clang-format-buffer)))
+;;(use-package clang-format
+;;  :bind (("C-c i" . clang-format-buffer)))
 
 ;;(require 'cmake-ide)
 ;;(cmake-ide-setup)
@@ -155,18 +171,18 @@
 ;;(setq cmake-ide-dir "build")
 ;;(global-set-key (kbd "C-c m") 'cmake-ide-compile)
 
-;;(use-package rtags
-;; :init
-;; (add-hook 'c-mode-common-hook 'rtags-start-process-unless-running)
-;; (add-hook 'c++-mode-common-hook 'rtags-start-process-unless-running)
-;;(setq rtags-path "/usr/local/bin")
-;; (setq rtags-autostart-diagnostics t)
-;; :config
-;; (rtags-enable-standard-keybindings))
-;; (rtags-diagnostics)
+(use-package rtags
+ :init
+ (add-hook 'c-mode-common-hook 'rtags-start-process-unless-running)
+ (add-hook 'c++-mode-common-hook 'rtags-start-process-unless-running)
+ (setq rtags-path "/usr/local/bin")
+ (setq rtags-autostart-diagnostics t)
+ :config
+ (rtags-enable-standard-keybindings))
+ (rtags-diagnostics)
 
 ;;*** Haskell
-(use-package haskell-mode)
+;;(use-package haskell-mode)
 
 ;;*** Python
 (use-package elpy
@@ -174,7 +190,7 @@
   (elpy-enable))
 
 ;;*** Yaml
-(use-package yaml-mode)
+;;(use-package yaml-mode)
 
 ;;*** Javascript
 (use-package js2-mode

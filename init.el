@@ -40,6 +40,9 @@
 (when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize))
 
+;;** Theme
+(load-theme 'leuven t)
+
 ;;* Packages
 ;;** Load path
 (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/rtags")

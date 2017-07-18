@@ -12,26 +12,22 @@
         dired-subtree
         elpy
         evil
+        exec-path-from-shell
         expand-region
-        gruvbox-theme
         ;;haskell-mode
         ivy
         js2-mode
         js2-refactor
-        leuven-theme
         magit
-        monokai-theme
         multiple-cursors
         neotree
         projectile
-        solarized-theme
         ;;speedbar
         ;;sr-speedbar
         swiper
-	use-package
+        use-package
         ;;yaml-mode
         yasnippet
-	;;zenburn-theme
 	))
 
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")

@@ -40,22 +40,6 @@
 (when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize))
 
-;;** Theme
-(setq custom-safe-themes t)
-;;(require 'zenburn-theme)
-;;(load-theme 'zenburn t)
-;;(require 'leuven-theme)
-;;(load-theme 'leuven t)
-;;(require 'leuven-theme)
-;;(load-theme 'leuven t)
-;;(require 'solarized-theme)
-;;(load-theme 'solarized-dark t)
-;;(load-theme 'solarized-light t)
-;;(require 'monokai-theme)
-;;(load-theme 'monokai)
-(require 'gruvbox-theme)
-(load-theme 'gruvbox t)
-
 ;;* Packages
 ;;** Load path
 (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/rtags")

@@ -7,6 +7,9 @@
         change-inner
         ;;cmake-ide
         ;;cmake-mode
+        company
+        company-irony
+        company-irony-c-headers
         counsel
         dired+
         dired-subtree
@@ -15,6 +18,7 @@
         exec-path-from-shell
         expand-region
         ;;haskell-mode
+        irony
         ivy
         js2-mode
         js2-refactor

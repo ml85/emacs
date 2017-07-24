@@ -7,6 +7,7 @@
 (setq inhibit-startup-message t)
 (setq initial-scratch-message "")
 (setq-default truncate-lines t)
+(setq column-number-mode t)
 (delete-selection-mode t)
 (show-paren-mode 1)
 (global-linum-mode 1)
@@ -174,6 +175,13 @@
 ;;  :init
 ;;  (setq speedbar-use-images nil))
 
+(use-package company
+  :ensure t
+  :init
+  (global-company-mode)
+  :config
+  (delete 'company-backends 'company-clang))
+
 ;; To get a bunch of extra snippets that come in super handy see:
 ;; htps://github.com/AndreaCrotti/yasnippet-snippets
 ;; or use:
@@ -200,10 +208,33 @@
  (add-hook 'c-mode-common-hook 'rtags-start-process-unless-running)
  (add-hook 'c++-mode-common-hook 'rtags-start-process-unless-running)
  (setq rtags-path "/usr/local/bin")
+ (setq rtags-display-result-backend 'ivy)
  (setq rtags-autostart-diagnostics t)
  :config
  (rtags-enable-standard-keybindings))
  (rtags-diagnostics)
+
+(use-package irony
+  :ensure t
+  :commands irony-mode
+  :config
+  (use-package company-irony
+    :ensure t
+    :config
+    (add-to-list 'company-backends 'company-irony))
+  (use-package company-irony-c-headers
+    :ensure t
+    :config
+    (add-to-list 'company-backends 'company-irony-c-headers))
+  (add-hook 'c++-mode-hook 'irony-mode)
+  (add-hook 'c-mode-hook 'irony-mode)
+  (defun my-irony-mode-hook ()
+    (define-key irony-mode-map
+      [remap completion-at-point] 'irony-completion-at-point-async)
+    (define-key irony-mode-map
+      [remap complete-symbol] 'irony-completion-at-point-async))
+  (add-hook 'irony-mode-hook 'my-irony-mode-hook)
+  (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
 
 ;;*** Haskell
 ;;(use-package haskell-mode)
@@ -241,3 +272,17 @@
 (global-set-key (kbd "C-c C-u") 'uncomment-region)
 (global-set-key (kbd "M-g M-s") 'magit-status)
 (global-set-key (kbd "M-g M-c") 'magit-checkout)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (company-irony-c-headers company-irony irony use-package projectile neotree magit js2-refactor exec-path-from-shell evil elpy dired-subtree dired+ counsel change-inner avy ag))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

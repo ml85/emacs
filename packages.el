@@ -17,6 +17,7 @@
         evil
         exec-path-from-shell
         expand-region
+        flycheck
         ;;haskell-mode
         irony
         ivy

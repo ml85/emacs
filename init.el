@@ -10,6 +10,7 @@
 (setq column-number-mode t)
 (delete-selection-mode t)
 (show-paren-mode 1)
+(electric-pair-mode)
 (global-linum-mode 1)
 (prefer-coding-system 'utf-8)
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -36,6 +37,8 @@
 (setq-default js-indent-level 2)
 (setq-default js2-basic-offset 2)
 (setq-default css-indent-offset 2)
+
+(load "~/.emacs.d/google-c-style.el")
 
 ;;** Inherit bash environment.
 (when (memq window-system '(mac ns x))
@@ -175,8 +178,9 @@
 ;;  :init
 ;;  (setq speedbar-use-images nil))
 
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+
 (use-package company
-  :ensure t
   :init
   (global-company-mode)
   :config
@@ -191,6 +195,7 @@
   (yas-global-mode 1)
   :config
   (add-to-list 'yas-snippet-dirs "~/.emacs.d/yasnippet-snippets/")
+  (add-to-list 'company-backends 'company-yasnippet)
   (yas-reload-all))
 
 ;;*** C++
@@ -204,30 +209,24 @@
 ;;(global-set-key (kbd "C-c m") 'cmake-ide-compile)
 
 (use-package rtags
- :init
- (add-hook 'c-mode-common-hook 'rtags-start-process-unless-running)
- (add-hook 'c++-mode-common-hook 'rtags-start-process-unless-running)
- (setq rtags-path "/usr/local/bin")
- (setq rtags-display-result-backend 'ivy)
- (setq rtags-autostart-diagnostics t)
- :config
- (rtags-enable-standard-keybindings))
- (rtags-diagnostics)
+  :init
+  (setq rtags-path "/usr/local/bin")
+  (setq rtags-display-result-backend 'ivy)
+  (setq rtags-autostart-diagnostics t)
+  :config
+  (rtags-enable-standard-keybindings))
+(rtags-diagnostics)
 
 (use-package irony
-  :ensure t
   :commands irony-mode
   :config
+  (setq irony-additional-clang-options '("-std=c++11"))
   (use-package company-irony
-    :ensure t
     :config
     (add-to-list 'company-backends 'company-irony))
   (use-package company-irony-c-headers
-    :ensure t
     :config
     (add-to-list 'company-backends 'company-irony-c-headers))
-  (add-hook 'c++-mode-hook 'irony-mode)
-  (add-hook 'c-mode-hook 'irony-mode)
   (defun my-irony-mode-hook ()
     (define-key irony-mode-map
       [remap completion-at-point] 'irony-completion-at-point-async)
@@ -235,6 +234,58 @@
       [remap complete-symbol] 'irony-completion-at-point-async))
   (add-hook 'irony-mode-hook 'my-irony-mode-hook)
   (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
+
+(use-package flycheck
+  :config
+  (use-package flycheck-rtags))
+
+(defun my-flycheck-rtags-setup ()
+      (flycheck-select-checker 'rtags)
+      (setq-local flycheck-highlighting-mode nil)
+      (setq-local flycheck-check-syntax-automatically nil))
+
+(defun my-c-mode-common-hook ()
+  (rtags-start-process-unless-running)
+  (irony-mode)
+  (flycheck-mode)
+  (my-flycheck-rtags-setup)
+  (google-set-c-style)
+  (google-make-newline-indent))
+
+(add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
+
+(global-set-key [f12] 
+  		'(lambda () 
+  		   (interactive)
+  		   (if (buffer-file-name)
+  		       (let*
+  			   ((fName (upcase (file-name-nondirectory (file-name-sans-extension buffer-file-name))))
+  			    (ifDef (concat "#ifndef " fName "_H" "\n#define " fName "_H" "\n"))
+  			    (begin (point-marker))
+  			    )
+  			 (progn
+  					; If less then 5 characters are in the buffer, insert the class definition
+  			   (if (< (- (point-max) (point-min)) 5 )
+  			       (progn
+  				 (insert "\nclass " (capitalize fName) "{\npublic:\n\nprivate:\n\n};\n")
+  				 (goto-char (point-min))
+  				 (next-line-nomark 3)
+  				 (setq begin (point-marker))
+  				 )
+  			     )
+  			   
+  					;Insert the Header Guard
+  			   (goto-char (point-min))
+  			   (insert ifDef)
+  			   (goto-char (point-max))
+  			   (insert "\n#endif" " //" fName "_H")
+  			   (goto-char begin))
+  			 )
+                                        ;else
+  		     (message (concat "Buffer " (buffer-name) " must have a filename"))
+  		     )
+  		   )
+  		)
 
 ;;*** Haskell
 ;;(use-package haskell-mode)
@@ -273,4 +324,4 @@
 (global-set-key (kbd "M-g M-s") 'magit-status)
 (global-set-key (kbd "M-g M-c") 'magit-checkout)
 (global-set-key (kbd "C-c o") 'ff-find-other-file)
-
+(global-set-key "\C-c\C-y" "\C-a\C- \C-n\M-w\C-y")

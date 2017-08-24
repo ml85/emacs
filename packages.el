@@ -23,6 +23,7 @@
         ivy
         js2-mode
         js2-refactor
+        key-chord
         magit
         multiple-cursors
         neotree

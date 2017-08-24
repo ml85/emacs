@@ -69,11 +69,8 @@
 (add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
 
 ;;** Evil mode
-(defun evil-keyboard-quit ()
-  "Keyboard quit and force normal state"
-  (interactive)
-  (and evil-mode (evil-force-normal-state))
-  (keyboard-quit))
+(require 'key-chord)
+(key-chord-mode 1)
 
 (use-package evil
   :init
@@ -82,11 +79,7 @@
     (evil-mode 1))
   :config
   (progn
-    (define-key evil-normal-state-map   (kbd "C-g") #'evil-keyboard-quit)
-    (define-key evil-motion-state-map   (kbd "C-g") #'evil-keyboard-quit)
-    (define-key evil-insert-state-map   (kbd "C-g") #'evil-keyboard-quit)
-    (define-key evil-window-map         (kbd "C-g") #'evil-keyboard-quit)
-    (define-key evil-operator-state-map (kbd "C-g") #'evil-keyboard-quit)))
+    (key-chord-define evil-insert-state-map "jj" 'evil-normal-state)))
 
 ;;** Cursor movement
 ;;*** Avy             
@@ -338,3 +331,17 @@
 (global-set-key (kbd "M-g M-c") 'magit-checkout)
 (global-set-key (kbd "C-c o") 'ff-find-other-file)
 (global-set-key "\C-c\C-y" "\C-a\C- \C-n\M-w\C-y")
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (key-chord use-package projectile neotree magit js2-refactor flycheck-rtags flycheck-irony exec-path-from-shell evil elpy dired-subtree dired+ counsel company-irony-c-headers company-irony change-inner avy ag))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

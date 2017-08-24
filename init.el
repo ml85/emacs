@@ -69,11 +69,24 @@
 (add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
 
 ;;** Evil mode
-;; (use-package evil
-;;   :init
-;;   (setq evil-want-C-u-scroll t)
-;;   :config
-;;   (evil-mode 1)
+(defun evil-keyboard-quit ()
+  "Keyboard quit and force normal state"
+  (interactive)
+  (and evil-mode (evil-force-normal-state))
+  (keyboard-quit))
+
+(use-package evil
+  :init
+  (progn
+    (setq evil-want-C-u-scroll t)
+    (evil-mode 1))
+  :config
+  (progn
+    (define-key evil-normal-state-map   (kbd "C-g") #'evil-keyboard-quit)
+    (define-key evil-motion-state-map   (kbd "C-g") #'evil-keyboard-quit)
+    (define-key evil-insert-state-map   (kbd "C-g") #'evil-keyboard-quit)
+    (define-key evil-window-map         (kbd "C-g") #'evil-keyboard-quit)
+    (define-key evil-operator-state-map (kbd "C-g") #'evil-keyboard-quit)))
 
 ;;** Cursor movement
 ;;*** Avy             
